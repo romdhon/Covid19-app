@@ -1,0 +1,64 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Timeline{% endblock %}
+
+{% block content %}
+    <div class="container top-space">
+        <form method="POST">
+            {% csrf_token %}
+            <label for="date"><h6>เลือกวันที่:</h6></label>
+            <select name="date" id="date">
+                {% for num, data in datas %}
+                <!-- <p>{{ data.Date }}</p> -->
+                <option value="{{ num }}">{{ data.Date }}</option>
+                {% endfor %}
+            </select>
+        
+            <input type="submit" value="ค้นหา" class="waves-effect waves-light btn">
+        </form>
+
+        <div class="container top-space">
+            <div class="row">
+                <div class="col s12 m12">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">ติดเชื้อสะสมในไทย</span>
+                            <p><em>วันที่ : {{ current.Date }}</em></p>
+                            <h1 style="text-align: center;">{{ current.Confirmed }}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12 m4">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">หายป่วยแล้ว</span>
+                            <h1 style="text-align: center;">{{ current.Recovered }}</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s12 m4">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">รักษาอยู่ใน รพ.</span>
+                            <h1 style="text-align: center;">{{ current.Hospitalized }}</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s12 m4">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">เสียชีวิต</span>
+                            <h1 style="text-align: center;">{{ current.Deaths }}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    
